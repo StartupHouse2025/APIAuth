@@ -1,0 +1,4 @@
+bcrypt==4.3.0
+flask==3.1.0
+flask_coors
+pymongo==4.11.2
