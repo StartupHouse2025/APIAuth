@@ -1,9 +1,12 @@
 from pymongo import MongoClient
+import os
 
 class ConnectionMongo:
     def __init__(self):
+        # Nombre de la base de datos
         db = "startup"
-        self.connection = MongoClient("mongodb+srv://admin2025:toolOne2025@databaseone.cqltp.mongodb.net/")
+        
+        self.connection = MongoClient(os.getenv("DATABASE_URL")) #Clave insegura
         self.con = self.connection[db]
 
         try:
@@ -11,9 +14,3 @@ class ConnectionMongo:
             print(f"✅ Conectado a MongoDB. Bases de datos disponibles: {databases}")
         except Exception as e:
             print(f"❌ Error al conectar a MongoDB: {e}")
-
-    def check_connection(self):
-        try:
-            return {"message": "Conexión a MongoDB exitosa", "databases": self.connection.list_database_names()}
-        except Exception as e:
-            return {"message": f"Error al conectar a MongoDB: {e}"}
